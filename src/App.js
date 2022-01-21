@@ -46,32 +46,48 @@ function App() {
 
   return (
     <main>
-      <div className="App">
-        <form onSubmit={handleSubmit}>
-          <input value={search} type='text' name='city' placeholder='City Name' onChange={handleChange} />
-          <button for='city'>Search</button>
-        </form>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <input
+        value={search}
+        type='text'
+        name='city'
+        placeholder='Location'
+        onChange={handleChange}
+        />
+        <button for='city'>Search</button>
+      </form>
         <section>
-          <img src={'https://openweathermap.org/img/wn/'+ allData.weatherIcons +'@2x.png'} />
-          <h1>{allData.city}</h1>
-          <h2>{allData.country}</h2>
+          <div className='header-div'>
+            <div>
+              <div className='data'>
+          <img src={'https://openweathermap.org/img/wn/' 
+            + allData.weatherIcons +'@2x.png'}/>
 
-          <div>
-            <div>
-              <h3>HUMIDITY</h3>
-              <p>{allData.humidity}%</p>
-            </div>
-            <div>
-              <h3>Temperature</h3>
-              <p>{allData.temperature}°C</p>
-            </div>
-            <div>
-              <h3>MIN TEMPERATURE</h3>
-              <p>{allData.minTemperature}°C</p>
+        <h1 className='title'>
+          {allData.city}</h1>
+        <h2 className='location'>
+          {allData.country}</h2> 
+
+        <div className='weather-description'>
+        <div>
+        <h3>HUMIDITY</h3>
+        <p>{allData.humidity}%</p>
+        </div>
+        <div>
+        <h3>TEMPERATURE</h3>
+        <p>{allData.temperature}°F</p>
+        </div>
+        <div>
+            <h3>MIN TEMPERATURE</h3>
+              <p>{allData.minTemperature}°F</p>
+                 </div>
+               </div>
+             </div>
             </div>
           </div>
         </section>
-      </div>
+    </div>
     </main>
   );
 }
