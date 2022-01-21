@@ -1,13 +1,17 @@
 import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { all } from 'q';
 
 function App() {
   const [search, setSearch] = useState('')
   const [allData, setAllData] = useState({
     city: '',
     country: '',
-    temperature: ''
+    temperature: '',
+    humidity: '',
+    minTemperature: '',
+    weatherIcons: ''
   })
 
   useEffect(() => {
@@ -21,7 +25,10 @@ function App() {
       await setAllData({
         city: result.data.name,
         country: result.data.sys.country,
-        temperature: result.data.main.temp
+        temperature: result.data.main.temp,
+        humidity: result.data.main.humidity,
+        minTemperature: result.data.main.temp_min,
+        weatherIcons: result.data.weather[0].icon
       })
     } catch (e) {
       console.log('API not loaded correctly or loaded for the first time')
@@ -45,10 +52,24 @@ function App() {
           <button for='city'>Search</button>
         </form>
         <section>
+          <img src={'https://openweathermap.org/img/wn/'+ allData.weatherIcons +'@2x.png'} />
           <h1>{allData.city}</h1>
           <h2>{allData.country}</h2>
-          <h3>Temperature</h3>
-          <p>{allData.temperature}°C</p>
+
+          <div>
+            <div>
+              <h3>HUMIDITY</h3>
+              <p>{allData.humidity}%</p>
+            </div>
+            <div>
+              <h3>Temperature</h3>
+              <p>{allData.temperature}°C</p>
+            </div>
+            <div>
+              <h3>MIN TEMPERATURE</h3>
+              <p>{allData.minTemperature}°C</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>
